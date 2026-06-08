@@ -174,7 +174,13 @@ revealOnScroll('.rsvp-buttons', { delay: 0.28 });
   // Read guest name from URL: ?guest=Marko
   const guestName = new URLSearchParams(window.location.search).get('guest') || '';
 
-  // Show personalised greeting if name present
+  // Swap "PERSON" in the hero title to the guest's name
+  if (guestName) {
+    const heroLines = document.querySelectorAll('.hero-line');
+    if (heroLines[1]) heroLines[1].textContent = guestName.toUpperCase();
+  }
+
+  // Show personalised greeting in RSVP section
   const greetingEl = document.getElementById('rsvp-greeting');
   if (guestName && greetingEl) {
     greetingEl.textContent = `Hey ${guestName}!`;
