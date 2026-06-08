@@ -261,7 +261,7 @@ body {
 }
 
 .rsvp-confirm-msg {
-  font-family: 'Cormorant Garamond', serif;
+  font-family: 'Handjet', sans-serif;
   font-size: clamp(1.6rem, 7vw, 2.4rem);
   font-weight: 400;
   line-height: 1.3;
