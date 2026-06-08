@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Eda & Onat — August 8th, 2026</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Handjet:wght@400;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <!-- HERO — sticky, stays behind while cards scroll over it -->
+  <section class="hero">
+    <div class="hero-bg">
+      <img src="hero.jpg" alt="Eda & Onat" class="hero-img">
+      <div class="hero-overlay"></div>
+    </div>
+    <div class="hero-content">
+      <h1 class="hero-title">
+        <span class="hero-line">WELCOME</span>
+        <span class="hero-line">PERSON</span>
+      </h1>
+      <p class="hero-name">We're pleased to announce that we will hold our wedding ceremony on August 8th on a private garden in Prizren. We are making heartfelt preparations for this special day of us and would love to see you there on our side. </p>
+    </div>
+  </section>
+
+  <!-- CARDS — scroll over the fixed hero -->
+  <div class="cards">
+
+    <!-- Story -->
+    <section class="card card--cream story-card">
+      <p class="story-text">
+        Our 7 year old journey had its ups and downs, we passed both through tough days and dreamy events. The reason we made it to this day is the people we met along the way, who were always there for us. We know you are busy, but we would be more than happy if you made it to our wedding.
+      </p>
+    </section>
+
+    <!-- Photos -->
+    <section class="card card--cream photos-card">
+      <div class="photo photo-1"><img src="photos/1.jpg" alt=""></div>
+      <div class="photo photo-2"><img src="photos/2.jpg" alt=""></div>
+      <div class="photo photo-3"><img src="photos/3.jpg" alt=""></div>
+      <div class="photo photo-4"><img src="photos/4.jpg" alt=""></div>
+      <div class="photo photo-5"><img src="photos/5.jpg" alt=""></div>
+    </section>
+
+    <!-- EDA -->
+    <section class="card card--cream person-card" id="card-eda">
+      <h2 class="person-name">EDA</h2>
+      <p class="person-bio">
+        Born in 2000 she is a Chemoinformatic drug designer, currently in Paris, (god knows where next). She is usually the "Mother" of friend groups. Has a thing for arranging stuff.
+      </p>
+      <div class="char-stage">
+        <div class="character" id="char-eda">
+          <img src="eda_idle.png" alt="Eda">
+        </div>
+      </div>
+    </section>
+
+    <!-- ONAT -->
+    <section class="card card--cream person-card" id="card-onat">
+      <h2 class="person-name">ONAT</h2>
+      <p class="person-bio">
+        The goofy sidekick. Born in 2001, younger than Eda. He is a Graphic Designer, has a weird meme taste that Eda cannot get. Loves trying stuff but never does something he liked twice.
+      </p>
+      <div class="char-stage">
+        <div class="character character--onat" id="char-onat">
+          <img src="onat-idle.png" alt="Onat">
+        </div>
+      </div>
+    </section>
+
+    <!-- Details (dark green) -->
+    <section class="card card--green details-card">
+      <div class="detail-item">
+        <span class="detail-label">DATE:</span>
+        <span class="detail-value">AUGUST 8TH 2026</span>
+      </div>
+      <div class="detail-item">
+        <span class="detail-label">TIME:</span>
+        <span class="detail-value">4:00 PM—FLEXIBLE</span>
+      </div>
+      <div class="detail-item">
+        <span class="detail-label">PLACE:</span>
+        <span class="detail-value">Planinarski Dom</span>
+      </div>
+    </section>
+
+    <!-- RSVP -->
+    <section class="card card--cream rsvp-card">
+      <h2 class="rsvp-title">We would love<br>your presence</h2>
+      <p class="rsvp-text">
+        We are so delighted to have you join us through our amazing journey. We would be more than happy to see you at the wedding to celebrate this special day with us.
+      </p>
+      <div class="rsvp-buttons">
+        <button class="btn btn--yes">YES</button>
+        <button class="btn btn--no">NO</button>
+      </div>
+      <div class="wave-stage">
+        <img id="wave-sprite" src="wave-1.png" alt="Eda & Onat waving">
+      </div>
+    </section>
+
+  </div><!-- /cards -->
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>

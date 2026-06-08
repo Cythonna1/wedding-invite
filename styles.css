@@ -1,0 +1,445 @@
+@font-face {
+  font-family: 'Bigilla';
+  src: url('Bigilla-Bold.otf') format('opentype');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+:root {
+  --cream: #F2EDE4;
+  --green: #2B3B28;
+  --orange: #C84B1A;
+  --dark: #1A1209;
+  --text: #1C1812;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: 'Handjet', system-ui, sans-serif;
+  font-weight: 400;
+  background: var(--dark);
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ─── HERO ─────────────────────────────── */
+
+.hero {
+  position: sticky;
+  top: 0;
+  height: 100svh;
+  width: 100%;
+  z-index: 1;
+  overflow: hidden;
+}
+
+.hero-bg {
+  position: absolute;
+  inset: 0;
+}
+
+.hero-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center top;
+  display: block;
+}
+
+.hero-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to bottom,
+    rgba(10, 8, 4, 0.1) 0%,
+    rgba(10, 8, 4, 0.6) 100%
+  );
+}
+
+.hero-content {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 2.5rem 1.5rem 3rem;
+}
+
+.hero-title {
+  font-family: 'Handjet', sans-serif;
+  font-weight: 800;
+  font-size: clamp(3.5rem, 18vw, 6rem);
+  line-height: 0.9;
+  color: #fff;
+  display: flex;
+  flex-direction: column;
+  letter-spacing: 0.01em;
+}
+
+.hero-line {
+  display: block;
+  will-change: transform, opacity;
+}
+
+.hero-name {
+  font-family: 'Handjet', sans-serif;
+  font-weight: 400;
+  font-size: 0.8rem;
+  color: rgba(255, 255, 255, 0.75);
+  margin-top: 1rem;
+  line-height: 1.65;
+  max-width: 300px;
+  will-change: opacity;
+}
+
+/* ─── CARDS ─────────────────────────────── */
+
+.cards {
+  position: relative;
+  z-index: 10;
+}
+
+.card {
+  width: 100%;
+  border-radius: 22px 22px 0 0;
+  padding: 3rem 1.5rem;
+  margin-top: -22px;
+}
+
+.card--cream {
+  background: var(--cream);
+  color: var(--text);
+}
+
+.card--green {
+  background: var(--green);
+  color: #fff;
+}
+
+/* ─── STORY ─────────────────────────────── */
+
+.story-card {
+  min-height: 55vh;
+  display: flex;
+  align-items: center;
+  padding-top: 4rem;
+  padding-bottom: 4rem;
+}
+
+.story-text {
+  font-size: 0.9rem;
+  line-height: 1.75;
+  font-weight: 400;
+  color: var(--text);
+  max-width: 440px;
+}
+
+/* ─── PHOTOS ─────────────────────────────── */
+
+.photos-card {
+  padding: 2rem 1.5rem 3rem;
+  overflow: hidden;
+}
+
+.photo {
+  position: relative;
+  aspect-ratio: 1068 / 1600;
+  margin-bottom: 1.5rem;
+  will-change: transform, opacity;
+}
+
+.photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* Scattered positioning — each photo offset left or right */
+.photo-1 { width: 58%; margin-left: 7%;  }
+.photo-2 { width: 54%; margin-left: 36%; }
+.photo-3 { width: 52%; margin-left: 28%; }
+.photo-4 { width: 56%; margin-left: 9%;  }
+.photo-5 { width: 48%; margin-left: 25%; }
+
+/* ─── PERSON ─────────────────────────────── */
+
+.person-card {
+  min-height: 52vh;
+  padding-top: 3.5rem;
+  padding-bottom: 3.5rem;
+}
+
+.person-name {
+  font-family: 'Handjet', sans-serif;
+  font-weight: 800;
+  font-size: clamp(5.5rem, 26vw, 10rem);
+  color: var(--orange);
+  line-height: 1;
+  letter-spacing: -0.01em;
+  margin-bottom: 1.25rem;
+}
+
+.person-bio {
+  font-size: 0.875rem;
+  line-height: 1.7;
+  font-weight: 400;
+  max-width: 320px;
+  color: var(--text);
+}
+
+/* ─── DETAILS ─────────────────────────────── */
+
+.details-card {
+  min-height: 75vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 2.5rem;
+  padding-top: 4rem;
+  padding-bottom: 4rem;
+}
+
+.detail-item {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+}
+
+.detail-label {
+  font-family: 'Handjet', sans-serif;
+  font-weight: 800;
+  font-size: clamp(3rem, 16vw, 5.5rem);
+  line-height: 1;
+  color: #fff;
+  letter-spacing: 0.02em;
+}
+
+.detail-value {
+  font-family: 'Handjet', sans-serif;
+  font-weight: 400;
+  font-size: clamp(1.2rem, 5.5vw, 1.8rem);
+  color: var(--orange);
+  letter-spacing: 0.03em;
+}
+
+/* ─── RSVP ─────────────────────────────── */
+
+.rsvp-card {
+  min-height: 70vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 1.5rem;
+  padding-top: 4rem;
+  padding-bottom: 5rem;
+}
+
+.rsvp-title {
+  font-family: 'Handjet', sans-serif;
+  font-weight: 800;
+  font-size: clamp(2rem, 9.5vw, 3rem);
+  line-height: 1.2;
+  color: var(--text);
+}
+
+.rsvp-text {
+  font-size: 0.875rem;
+  line-height: 1.75;
+  font-weight: 400;
+  max-width: 320px;
+  color: var(--text);
+}
+
+.rsvp-buttons {
+  display: flex;
+  gap: 0.85rem;
+  margin-top: 0.5rem;
+}
+
+.btn {
+  padding: 0.8rem 2.75rem;
+  font-family: 'Handjet', sans-serif;
+  font-size: 0.75rem;
+  font-weight: 400;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  cursor: pointer;
+  border-radius: 3px;
+  transition: opacity 0.2s ease;
+}
+
+.btn--yes {
+  background: var(--orange);
+  color: #fff;
+  border: 2px solid var(--orange);
+}
+
+.btn--no {
+  background: transparent;
+  color: var(--text);
+  border: 2px solid var(--text);
+}
+
+.btn:hover {
+  opacity: 0.75;
+}
+
+/* ─── WAVE SPRITE ─────────────────────────────── */
+
+.wave-stage {
+  display: flex;
+  justify-content: center;
+  margin-top: 3rem;
+  opacity: 0; /* fades in on load via GSAP */
+}
+
+.wave-stage img {
+  width: 288px;  /* 96px × 3 */
+  height: 288px;
+  image-rendering: pixelated;
+  image-rendering: crisp-edges;
+  display: block;
+}
+
+/* ─── STARDEW VALLEY ─────────────────────────────── */
+
+.card {
+  position: relative;
+}
+
+/* Stars */
+.star {
+  position: absolute;
+  width: 2px;
+  height: 2px;
+  background: rgba(255, 252, 200, 0.95);
+  pointer-events: none;
+  z-index: 2;
+  animation: star-twinkle var(--dur, 2s) var(--delay, 0s) ease-in-out infinite;
+}
+
+.star.cross {
+  box-shadow:
+    0 -2px 0 0 rgba(255, 252, 200, 0.7),
+    0  2px 0 0 rgba(255, 252, 200, 0.7),
+    -2px 0 0 0 rgba(255, 252, 200, 0.7),
+     2px 0 0 0 rgba(255, 252, 200, 0.7);
+}
+
+@keyframes star-twinkle {
+  0%, 100% { opacity: 0.08; transform: scale(0.5); }
+  50%       { opacity: 1;    transform: scale(1.5); }
+}
+
+/* Fireflies */
+.firefly {
+  position: absolute;
+  width: 2px;
+  height: 2px;
+  background: #ccff66;
+  box-shadow:
+    2px 0   0 0 #ccff66,
+    0   2px 0 0 #ccff66,
+    2px 2px 0 0 #ccff66,
+    0   0   5px 3px rgba(150, 220, 70, 0.45),
+    1px 1px 9px 4px rgba(150, 220, 70, 0.2);
+  pointer-events: none;
+  z-index: 8;
+  image-rendering: pixelated;
+  animation: firefly-float var(--dur, 5s) var(--delay, 0s) ease-in-out infinite;
+}
+
+@keyframes firefly-float {
+  0%   { transform: translate(0, 0);                 opacity: 0;   }
+  12%  {                                              opacity: 1;   }
+  45%  { transform: translate(var(--x1), var(--y1)); opacity: 0.8; }
+  75%  { transform: translate(var(--x2), var(--y2)); opacity: 0.9; }
+  90%  {                                              opacity: 0.2; }
+  100% { transform: translate(var(--x3), var(--y3)); opacity: 0;   }
+}
+
+/* Grass strip at top of cream cards */
+.grass-strip {
+  position: absolute;
+  top: -10px;
+  left: 0;
+  right: 0;
+  height: 16px;
+  pointer-events: none;
+  z-index: 6;
+  overflow: visible;
+}
+
+.grass-tuft {
+  position: absolute;
+  bottom: 0;
+  width: 4px;
+  height: 4px;
+  pointer-events: none;
+}
+
+/* Stardew-style panel border on dark green card */
+.details-card {
+  box-shadow:
+    inset 0 0 0 3px #527a52,
+    inset 0 0 0 7px #2B3B28,
+    inset 0 0 0 10px #3d5f3d;
+}
+
+/* ─── CHARACTER SPRITES ─────────────────────────────── */
+
+.char-stage {
+  width: 100%;
+  height: 290px;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  margin-top: 2.5rem;
+  position: relative;
+  overflow: hidden; /* clips walking character to just this area */
+}
+
+.character {
+  width: 276px;
+  height: 276px;
+  flex-shrink: 0;
+  will-change: transform;
+}
+
+.character img {
+  width: 100%;
+  height: 100%;
+  display: block;
+  image-rendering: pixelated;
+  image-rendering: crisp-edges;
+}
+
+/* Golden corner ornaments on person cards */
+.px-corner {
+  position: absolute;
+  width: 4px;
+  height: 4px;
+  background: #d4a840;
+  pointer-events: none;
+  z-index: 5;
+  box-shadow:
+    0   -4px 0 0 #d4a840,
+    -4px  0  0 0 #d4a840,
+     4px  0  0 0 #d4a840,
+    0    4px 0 0 #d4a840,
+    -4px -4px 0 0 rgba(212, 168, 64, 0.35),
+     4px -4px 0 0 rgba(212, 168, 64, 0.35),
+    -4px  4px 0 0 rgba(212, 168, 64, 0.35),
+     4px  4px 0 0 rgba(212, 168, 64, 0.35);
+}
