@@ -89,14 +89,25 @@
 
     <!-- RSVP -->
     <section class="card card--cream rsvp-card">
-      <h2 class="rsvp-title">We would love<br>your presence</h2>
-      <p class="rsvp-text">
-        We are so delighted to have you join us through our amazing journey. We would be more than happy to see you at the wedding to celebrate this special day with us.
-      </p>
-      <div class="rsvp-buttons">
-        <button class="btn btn--yes">YES</button>
-        <button class="btn btn--no">NO</button>
+
+      <!-- Form state -->
+      <div class="rsvp-state" id="rsvp-form">
+        <p class="rsvp-guest-name" id="rsvp-greeting"></p>
+        <h2 class="rsvp-title">We would love<br>your presence</h2>
+        <p class="rsvp-text">
+          We are so delighted to have you join us through our amazing journey. We would be more than happy to see you at the wedding to celebrate this special day with us.
+        </p>
+        <div class="rsvp-buttons">
+          <button class="btn btn--yes" id="btn-yes">YES</button>
+          <button class="btn btn--no"  id="btn-no">NO</button>
+        </div>
       </div>
+
+      <!-- Confirmation state (hidden until after click) -->
+      <div class="rsvp-state rsvp-confirm" id="rsvp-confirm">
+        <p class="rsvp-confirm-msg" id="rsvp-confirm-msg"></p>
+      </div>
+
       <div class="wave-stage">
         <img id="wave-sprite" src="wave-1.png" alt="Eda & Onat waving">
       </div>

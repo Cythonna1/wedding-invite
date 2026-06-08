@@ -165,6 +165,63 @@ revealOnScroll('.rsvp-title');
 revealOnScroll('.rsvp-text', { delay: 0.15 });
 revealOnScroll('.rsvp-buttons', { delay: 0.28 });
 
+// ─── RSVP ────────────────────────────────────────────────────────────────────
+
+(function setupRSVP() {
+  // ← Paste your Google Apps Script Web App URL here after deploying
+  const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbyP30f9RmgSm7E8gA_HxqNn1qbMwq_lbUdufTWnXrnBLhFtpmtdpsbfXI0K3AnyY5-uFg/exec';
+
+  // Read guest name from URL: ?guest=Marko
+  const guestName = new URLSearchParams(window.location.search).get('guest') || '';
+
+  // Show personalised greeting if name present
+  const greetingEl = document.getElementById('rsvp-greeting');
+  if (guestName && greetingEl) {
+    greetingEl.textContent = `Hey ${guestName}!`;
+  }
+
+  function submit(response) {
+    // Disable both buttons immediately to prevent double clicks
+    document.getElementById('btn-yes').disabled = true;
+    document.getElementById('btn-no').disabled  = true;
+
+    // Send to Google Sheets (no-cors = fire and forget, data still saves)
+    const body = new URLSearchParams({
+      name:      guestName || 'Guest',
+      response:  response,
+    });
+    fetch(SCRIPT_URL, {
+      method:  'POST',
+      mode:    'no-cors',
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+      body:    body.toString(),
+    });
+
+    // Swap to confirmation screen
+    const form    = document.getElementById('rsvp-form');
+    const confirm = document.getElementById('rsvp-confirm');
+    const msg     = document.getElementById('rsvp-confirm-msg');
+
+    const name = guestName ? `, ${guestName}` : '';
+
+    msg.textContent = response === 'yes'
+      ? `See you on August 8th${name}! 🎉`
+      : `We'll miss you${name}. Thanks for letting us know. 🤍`;
+
+    gsap.to(form, {
+      opacity: 0, y: -20, duration: 0.4, ease: 'power2.in',
+      onComplete() {
+        form.style.display = 'none';
+        confirm.style.display = 'flex';
+        gsap.from(confirm, { opacity: 0, y: 20, duration: 0.6, ease: 'power2.out' });
+      }
+    });
+  }
+
+  document.getElementById('btn-yes').addEventListener('click', () => submit('yes'));
+  document.getElementById('btn-no').addEventListener('click',  () => submit('no'));
+}());
+
 // ─── Waving sprite (RSVP section) ────────────────────────────────────────────
 
 (function setupWave() {
