@@ -161,7 +161,7 @@ body {
   height: 100svh;
   width: 100%;
   pointer-events: none;
-  z-index: 5; /* above photos (z-index:4) so chars fall in front */
+  z-index: 3; /* below photos (z-index:4) so chars fall behind */
 }
 
 .falling-char {
@@ -204,7 +204,7 @@ body {
 
 .sky-photo {
   position: absolute;
-  width: 60%;
+  width: 65%;
   z-index: 4;
   opacity: 0; /* revealed by JS */
   will-change: opacity;
