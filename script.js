@@ -124,8 +124,8 @@ function pixelClipPath(seed, S = 3) {
   const onatFrames = ['onatfalling1.png', 'onatfalling2.png', 'onatfalling3.png'];
   let edaIdx = 0, onatIdx = 0;
 
-  // Start above viewport
-  gsap.set([edaEl, onatEl], { y: -260 });
+  // Sprites start hidden above the sticky viewport
+  gsap.set([edaEl, onatEl], { y: -200 });
 
   // Sprite loop at ~6 fps
   setInterval(() => {
@@ -135,29 +135,26 @@ function pixelClipPath(seed, S = 3) {
     onatImg.src = onatFrames[onatIdx];
   }, 160);
 
-  // Fall tied to scroll — pixels to travel = viewport height + 260 (start offset) + 200 (exit)
-  gsap.to([edaEl, onatEl], {
-    y: () => window.innerHeight + 200,
-    ease: 'none',
+  // Single timeline: starts the moment the sky section enters the viewport from below.
+  // Characters travel from above-screen to below-screen over exactly 2 viewport heights
+  // of scroll — they move at ~1:1 with the page so they feel like they're drifting with it.
+  const fallTl = gsap.timeline({
     scrollTrigger: {
       trigger: '.sky-card',
-      start: 'top top',
-      end:   () => '+=' + window.innerHeight * 3,
-      scrub: 1.5,
+      start: 'top bottom',           // fires as sky-card's top edge hits viewport bottom
+      end:   () => '+=' + (window.innerHeight * 2),
+      scrub: 1,
     },
   });
 
-  // Fade out near the end of their fall
-  gsap.to([edaEl, onatEl], {
-    opacity: 0,
-    ease: 'none',
-    scrollTrigger: {
-      trigger: '.sky-card',
-      start: () => '+=' + window.innerHeight * 2.5,
-      end:   () => '+=' + window.innerHeight * 3,
-      scrub: true,
-    },
-  });
+  fallTl
+    .fromTo([edaEl, onatEl],
+      { y: -200 },
+      { y: () => window.innerHeight + 180, ease: 'none', duration: 1 },
+      0
+    )
+    // fade out over the last 25%
+    .to([edaEl, onatEl], { opacity: 0, ease: 'none', duration: 0.25 }, 0.75);
 }());
 
 // Sky photos: use IntersectionObserver — works reliably with position:absolute elements
