@@ -110,25 +110,68 @@ function pixelClipPath(seed, S = 3) {
   return `polygon(${pts.join(', ')})`;
 }
 
-// Photos now use the Stardew canvas border (CSS) — no clip-path needed.
+// ─── Sky section: falling characters + photo reveals ─────────────────────────
 
-// ─── Photos: each slides up on its own as you scroll ─────────────────────────
+(function setupFalling() {
+  const edaEl  = document.getElementById('char-fall-eda');
+  const onatEl = document.getElementById('char-fall-onat');
+  if (!edaEl || !onatEl) return;
 
-gsap.utils.toArray('.photo').forEach((photo) => {
-  gsap.fromTo(photo,
-    { opacity: 0, y: 70 },
-    {
-      opacity: 1,
-      y: 0,
-      duration: 1,
-      ease: 'power2.out',
-      scrollTrigger: {
-        trigger: photo,
-        start: 'top 92%',
-        toggleActions: 'play none none none',
-      },
-    }
-  );
+  const edaImg  = edaEl.querySelector('img');
+  const onatImg = onatEl.querySelector('img');
+
+  const edaFrames  = ['edafalling1.png',  'edafalling2.png',  'edafalling3.png'];
+  const onatFrames = ['onatfalling1.png', 'onatfalling2.png', 'onatfalling3.png'];
+  let edaIdx = 0, onatIdx = 0;
+
+  // Start above viewport
+  gsap.set([edaEl, onatEl], { y: -220 });
+
+  // Sprite loop at ~6 fps
+  setInterval(() => {
+    edaIdx  = (edaIdx  + 1) % edaFrames.length;
+    onatIdx = (onatIdx + 1) % onatFrames.length;
+    edaImg.src  = edaFrames[edaIdx];
+    onatImg.src = onatFrames[onatIdx];
+  }, 160);
+
+  // Fall tied to scroll — over the first 300% of viewport height within the sky section
+  gsap.to([edaEl, onatEl], {
+    y: () => window.innerHeight + 180,
+    ease: 'none',
+    scrollTrigger: {
+      trigger: '.sky-card',
+      start: 'top top',
+      end:   'top+=300%',
+      scrub: 1.5,
+    },
+  });
+
+  // Fade out as they exit through the bottom
+  gsap.to([edaEl, onatEl], {
+    opacity: 0,
+    ease: 'power1.in',
+    scrollTrigger: {
+      trigger: '.sky-card',
+      start: 'top+=260%',
+      end:   'top+=310%',
+      scrub: true,
+    },
+  });
+}());
+
+// Sky photos pop in as they scroll into view
+gsap.utils.toArray('.sky-photo').forEach((photo) => {
+  gsap.to(photo, {
+    opacity: 1,
+    duration: 0.7,
+    ease: 'power2.out',
+    scrollTrigger: {
+      trigger: photo,
+      start: 'top 92%',
+      toggleActions: 'play none none none',
+    },
+  });
 });
 
 // ─── Content reveals ──────────────────────────────────────────────────────────
