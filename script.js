@@ -124,8 +124,8 @@ function pixelClipPath(seed, S = 3) {
   const onatFrames = ['onatfalling1.png', 'onatfalling2.png', 'onatfalling3.png'];
   let edaIdx = 0, onatIdx = 0;
 
-  // Sprites start hidden above the sticky viewport
-  gsap.set([edaEl, onatEl], { y: -260 });
+  // Start well above viewport — overflow:clip on sky-card hides them until fly-in
+  gsap.set([edaEl, onatEl], { y: -500, opacity: 0 });
 
   // Sprite loop at ~6 fps
   setInterval(() => {
@@ -135,27 +135,27 @@ function pixelClipPath(seed, S = 3) {
     onatImg.src = onatFrames[onatIdx];
   }, 160);
 
-  // Fall tied to scroll — starts when sky-card reaches viewport top
-  gsap.to([edaEl, onatEl], {
-    y: () => window.innerHeight + 200,
-    ease: 'none',
-    scrollTrigger: {
-      trigger: '.sky-card',
-      start: 'top top',
-      end:   () => '+=' + window.innerHeight * 3,
-      scrub: 1.5,
+  // Fly in once when sky section appears — land at y:0 (their CSS top:35% position)
+  ScrollTrigger.create({
+    trigger: '.sky-card',
+    start: 'top 85%',
+    once: true,
+    onEnter() {
+      gsap.to([edaEl, onatEl], {
+        y: 0, opacity: 1,
+        duration: 1.1,
+        ease: 'power2.out',
+      });
     },
   });
 
-  // Fade out near the end of their fall
-  gsap.to([edaEl, onatEl], {
-    opacity: 0,
-    ease: 'none',
-    scrollTrigger: {
-      trigger: '.sky-card',
-      start: () => '+=' + window.innerHeight * 2.5,
-      end:   () => '+=' + window.innerHeight * 3,
-      scrub: true,
+  // Fade out as the sky section ends
+  ScrollTrigger.create({
+    trigger: '.sky-card',
+    start: 'bottom 85%',
+    once: true,
+    onEnter() {
+      gsap.to([edaEl, onatEl], { opacity: 0, duration: 0.7, ease: 'power2.in' });
     },
   });
 }());

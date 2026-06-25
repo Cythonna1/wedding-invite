@@ -147,10 +147,11 @@ body {
 /* ─── SKY / TIMELINE ─────────────────────────────── */
 
 .sky-card {
-  height: 1050vh;
+  height: 840vh;
   background: url('sky-bluebackground.png') top center / 100% 100% no-repeat;
   padding: 0;
   position: relative;
+  overflow: clip; /* clips chars at negative y without breaking sticky */
 }
 
 /* Sticky layer — characters ride here as you scroll */
@@ -165,6 +166,7 @@ body {
 
 .falling-char {
   position: absolute;
+  top: 35%; /* fixed resting spot in the sticky viewport */
   will-change: transform, opacity;
 }
 
@@ -201,7 +203,7 @@ body {
 
 .sky-photo {
   position: absolute;
-  width: 90%;
+  width: 60%;
   z-index: 4;
   opacity: 0; /* revealed by JS */
   will-change: opacity;
@@ -218,25 +220,25 @@ body {
   display: block;
 }
 
-/* Large photos — 90% wide, subtle drift, 60vh apart */
-.sky-p1  { left: 2%;  top:   5vh; }
-.sky-p2  { left: 8%;  top:  65vh; }
-.sky-p3  { left: 3%;  top: 125vh; }
-.sky-p4  { left: 7%;  top: 185vh; }
-.sky-p5  { left: 2%;  top: 245vh; }
-.sky-p6  { left: 6%;  top: 305vh; }
-.sky-p7  { left: 4%;  top: 365vh; }
-.sky-p8  { left: 8%;  top: 425vh; }
-.sky-p9  { left: 2%;  top: 485vh; }
-.sky-p10 { left: 5%;  top: 545vh; }
-.sky-p11 { left: 7%;  top: 605vh; }
-.sky-p12 { left: 3%;  top: 665vh; }
-.sky-p13 { left: 6%;  top: 725vh; }
-.sky-p14 { left: 2%;  top: 785vh; }
-.sky-p15 { left: 8%;  top: 845vh; }
-.sky-p16 { left: 4%;  top: 905vh; }
-.sky-p17 { left: 7%;  top: 950vh; }
-.sky-p18 { left: 3%;  top: 990vh; }
+/* 60%-wide photos, slight left drift, 45vh apart */
+.sky-p1  { left: 2%;  top:  5vh; }
+.sky-p2  { left: 8%;  top: 50vh; }
+.sky-p3  { left: 3%;  top: 95vh; }
+.sky-p4  { left: 7%;  top: 140vh; }
+.sky-p5  { left: 2%;  top: 185vh; }
+.sky-p6  { left: 8%;  top: 230vh; }
+.sky-p7  { left: 3%;  top: 275vh; }
+.sky-p8  { left: 7%;  top: 320vh; }
+.sky-p9  { left: 2%;  top: 365vh; }
+.sky-p10 { left: 8%;  top: 410vh; }
+.sky-p11 { left: 3%;  top: 455vh; }
+.sky-p12 { left: 7%;  top: 500vh; }
+.sky-p13 { left: 2%;  top: 545vh; }
+.sky-p14 { left: 8%;  top: 590vh; }
+.sky-p15 { left: 3%;  top: 635vh; }
+.sky-p16 { left: 7%;  top: 678vh; }
+.sky-p17 { left: 2%;  top: 720vh; }
+.sky-p18 { left: 8%;  top: 760vh; }
 
 /* ─── PERSON ─────────────────────────────── */
 
