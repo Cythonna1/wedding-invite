@@ -125,7 +125,7 @@ function pixelClipPath(seed, S = 3) {
   let edaIdx = 0, onatIdx = 0;
 
   // Start above viewport
-  gsap.set([edaEl, onatEl], { y: -220 });
+  gsap.set([edaEl, onatEl], { y: -260 });
 
   // Sprite loop at ~6 fps
   setInterval(() => {
@@ -135,44 +135,44 @@ function pixelClipPath(seed, S = 3) {
     onatImg.src = onatFrames[onatIdx];
   }, 160);
 
-  // Fall tied to scroll — over the first 300% of viewport height within the sky section
+  // Fall tied to scroll — pixels to travel = viewport height + 260 (start offset) + 200 (exit)
   gsap.to([edaEl, onatEl], {
-    y: () => window.innerHeight + 180,
+    y: () => window.innerHeight + 200,
     ease: 'none',
     scrollTrigger: {
       trigger: '.sky-card',
       start: 'top top',
-      end:   'top+=300%',
+      end:   () => '+=' + window.innerHeight * 3,
       scrub: 1.5,
     },
   });
 
-  // Fade out as they exit through the bottom
+  // Fade out near the end of their fall
   gsap.to([edaEl, onatEl], {
     opacity: 0,
-    ease: 'power1.in',
+    ease: 'none',
     scrollTrigger: {
       trigger: '.sky-card',
-      start: 'top+=260%',
-      end:   'top+=310%',
+      start: () => '+=' + window.innerHeight * 2.5,
+      end:   () => '+=' + window.innerHeight * 3,
       scrub: true,
     },
   });
 }());
 
-// Sky photos pop in as they scroll into view
-gsap.utils.toArray('.sky-photo').forEach((photo) => {
-  gsap.to(photo, {
-    opacity: 1,
-    duration: 0.7,
-    ease: 'power2.out',
-    scrollTrigger: {
-      trigger: photo,
-      start: 'top 92%',
-      toggleActions: 'play none none none',
-    },
-  });
-});
+// Sky photos: use IntersectionObserver — works reliably with position:absolute elements
+(function revealSkyPhotos() {
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.05 });
+
+  document.querySelectorAll('.sky-photo').forEach(p => observer.observe(p));
+}());
 
 // ─── Content reveals ──────────────────────────────────────────────────────────
 
