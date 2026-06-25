@@ -149,13 +149,17 @@ function pixelClipPath(seed, S = 3) {
     },
   });
 
-  // Fade out as the sky section ends
+  // Slide off the bottom as the sky section ends
   ScrollTrigger.create({
     trigger: '.sky-card',
     start: 'bottom 85%',
     once: true,
     onEnter() {
-      gsap.to([edaEl, onatEl], { opacity: 0, duration: 0.7, ease: 'power2.in' });
+      gsap.to([edaEl, onatEl], {
+        y: () => window.innerHeight + 200,
+        duration: 1.2,
+        ease: 'power2.in',
+      });
     },
   });
 }());
